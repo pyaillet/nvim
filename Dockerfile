@@ -22,6 +22,9 @@ ADD data /root
 
 WORKDIR /root
 
-RUN /root/install.sh
+RUN /root/install.sh && \
+	rm /root/install.sh
+
+WORKDIR /usr/src/app
 
 VOLUME /usr/src/app

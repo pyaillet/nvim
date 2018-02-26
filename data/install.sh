@@ -6,6 +6,9 @@ mv init.vim ~/.config/nvim/
 mv autoload/* ~/.config/nvim/autoload/
 mv theme/* ~/.config/nvim/colors/
 
+rmdir autoload
+rmdir theme
+
 cd ~/.vim/plugged
 git clone https://github.com/fatih/vim-go.git
 git clone https://github.com/scrooloose/nerdtree.git

@@ -9,12 +9,23 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'fatih/vim-go', { 'tag': '*' }
-Plug 'roxma/nvim-completion-manager'
-Plug 'roxma/ncm-flow'
 Plug 'cloudhead/neovim-fuzzy'
+Plug 'vim-airline/vim-airline'
 
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+let g:loaded_python_provider=0
+let g:python3_host_prog = '/usr/bin/python3'
+let g:deoplete#enable_at_startup = 1
 
 call plug#end()
+
 
 " Turn on syntax highlighting
 syntax on
@@ -112,10 +123,6 @@ nmap <C-P> :NERDTreeToggle "\<CR>"
 
 nnoremap <C-T> :tabnew <CR>
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-imap <expr> <CR>  (pumvisible() ?  "\<c-y>\<Plug>(expand_or_nl)" : "\<CR>")
-imap <expr> <Plug>(expand_or_nl) (cm#completed_is_snippet() ? "\<C-U>":"\<CR>")
 
 " colorscheme deus

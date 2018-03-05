@@ -13,6 +13,7 @@ cd ~/.vim/plugged
 git clone https://github.com/fatih/vim-go.git
 git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/cloudhead/neovim-fuzzy.git
-git clone https://github.com/roxma/nvim-completion-manager.git
-git clone https://github.com/roxma/ncm-flow.git
-
+git clone https://github.com/Shougo/deoplete.nvim.git
+git clone https://github.com/roxma/nvim-yarp.git
+git clone https://github.com/roxma/vim-hug-neovim-rpc.git
+git clone https://github.com/vim-airline/vim-airline.git

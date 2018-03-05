@@ -15,4 +15,4 @@ git clone https://github.com/scrooloose/nerdtree.git
 git clone https://github.com/cloudhead/neovim-fuzzy.git
 git clone https://github.com/roxma/nvim-completion-manager.git
 git clone https://github.com/roxma/ncm-flow.git
-
+git clone https://github.com/vim-airline/vim-airline.git

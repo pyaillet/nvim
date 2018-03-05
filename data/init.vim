@@ -12,6 +12,7 @@ Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/ncm-flow'
 Plug 'cloudhead/neovim-fuzzy'
+Plug 'vim-airline/vim-airline'
 
 
 call plug#end()

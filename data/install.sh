@@ -23,3 +23,4 @@ git clone https://github.com/Shougo/deoplete.nvim.git
 git clone https://github.com/roxma/nvim-yarp.git
 git clone https://github.com/roxma/vim-hug-neovim-rpc.git
 git clone https://github.com/vim-airline/vim-airline.git
+git clone https://github.com/tpope/vim-fugitive.git

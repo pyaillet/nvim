@@ -20,12 +20,12 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-let g:loaded_python_provider=0
-let g:python3_host_prog = '/usr/bin/python3'
-let g:deoplete#enable_at_startup = 1
-
 call plug#end()
 
+let g:deoplete#enable_at_startup=1
+let g:deoplete#enable_on_insert_enter=1
+let g:loaded_python_provider=0
+let g:python3_host_prog='/usr/bin/python3'
 
 " Turn on syntax highlighting
 syntax on
@@ -122,6 +122,9 @@ nmap <C-O> :FuzzyOpen <CR>
 nmap <C-P> :NERDTreeToggle "\<CR>"
 
 nnoremap <C-T> :tabnew <CR>
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 

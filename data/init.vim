@@ -12,6 +12,7 @@ Plug 'fatih/vim-go', { 'tag': '*' }
 Plug 'cloudhead/neovim-fuzzy'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }

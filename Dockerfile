@@ -30,3 +30,5 @@ RUN /root/install.sh && \
 WORKDIR /usr/src/app
 
 VOLUME /usr/src/app
+
+ENTRYPOINT ["nvim"]

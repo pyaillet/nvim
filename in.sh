@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker container run -it -v $PWD:/usr/src/app pyaillet/nvim nvim $@
+docker container run -it -v $HOME/.gitconfig:/root/.gitconfig -v $PWD:/usr/src/app pyaillet/nvim $@

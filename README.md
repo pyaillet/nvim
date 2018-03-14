@@ -1,3 +1,5 @@
+[![](https://dockerbuildbadges.quelltext.eu/status.svg?organization=pyaillet&repository=nvim)](https://hub.docker.com/r/pyaillet/nvim/builds/)  
+
 # NVim
 
 Neovim containerized with my custom setup

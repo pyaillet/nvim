@@ -20,4 +20,6 @@ Neovim containerized with my custom setup
  - &lt;C-T&gt;: Opens a new tab
  - Tab: to switch between results when autocompleting
 
+## Preview
 
+![Preview of this setup](https://pyaillet.github.com/nvim/images/screenshot.png)

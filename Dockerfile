@@ -9,11 +9,9 @@ RUN git clone https://github.com/jhawthorn/fzy.git && \
 
 FROM alpine:3.7
 
-RUN apk update && \
-	apk add curl gcc git libc-dev neovim the_silver_searcher python3 python3-dev && \
+RUN apk add --no-cache bash curl gcc git libc-dev neovim the_silver_searcher python3 python3-dev && \
 	pip3 install neovim && \
-	apk del gcc libc-dev python3-dev && \
-	rm -rf /var/cache/apk/*
+	apk del gcc libc-dev python3-dev
 
 RUN mkdir -p /usr/local/bin/ /usr/local/share/man/man1/
 

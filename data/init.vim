@@ -1,133 +1,125 @@
-" Don't try to be vi compatible
 set nocompatible
 
-" Helps force plugins to load correctly when it is turned back on below
-filetype off
-
-" TODO: Load plugins here (pathogen or vundle)
-call plug#begin('~/.vim/plugged')
-
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'fatih/vim-go', { 'tag': '*' }
-Plug 'cloudhead/neovim-fuzzy'
+call plug#begin("~/.config/nvim/bundle")
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'jremmen/vim-ripgrep'
+Plug 'w0rp/ale'
+Plug 'roxma/nvim-completion-manager'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'mxw/vim-jsx'
+Plug 'mattn/emmet-vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'iCyMind/NeoSolarized'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
+Plug 'ap/vim-css-color'
+Plug 'rust-lang/rust.vim'
 Plug 'airblade/vim-gitgutter'
-
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-surround'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 call plug#end()
 
-let g:deoplete#enable_at_startup=1
-let g:deoplete#enable_on_insert_enter=1
-let g:loaded_python_provider=0
-let g:python3_host_prog='/usr/bin/python3'
-
-" Turn on syntax highlighting
-syntax on
-
-" For plugins to load correctly
 filetype plugin indent on
-
-" TODO: Pick a leader key
-" let mapleader = ","
-
-" Security
-set modelines=0
-
-" Show line numbers
-set number
-
-" Show file stats
-set ruler
-
-" Blink cursor on error instead of beeping (grr)
-set visualbell
-
-" Encoding
-set encoding=utf-8
-
-" Whitespace
-set wrap
-set textwidth=79
-set formatoptions=tcqrn1
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set noshiftround
-
-" Cursor motion
-set scrolloff=3
-set backspace=indent,eol,start
-set matchpairs+=<:> " use % to jump between pairs
-runtime! macros/matchit.vim
-
-" Move up/down editor lines
-nnoremap j gj
-nnoremap k gk
-
-" Allow hidden buffers
-set hidden
-
-" Rendering
-set ttyfast
-
-" Status bar
-set laststatus=2
-
-" Last line
+syntax on
 set showmode
 set showcmd
 
-" Searching
-nnoremap / /\v
-vnoremap / /\v
-set hlsearch
-set incsearch
-set ignorecase
+set encoding=utf8
+set fileencoding=utf8
+set fileformat=unix
+set autoindent
+set ts=2
+
+set scrolloff=5
+
+set ruler
+set number relativenumber
+set cursorline
+set colorcolumn=80
+
+set backspace=indent,eol,start
+
+set softtabstop=2
+set shiftwidth=2
+set tabstop=2
+set expandtab
+
+set showmatch  "show matching brackets/parenthesis
+set incsearch  "find as you type search
+set hlsearch   "highlight search terms
+set ignorecase "case insensitive search
 set smartcase
-set showmatch
-map <leader><space> :let @/=''<cr> " clear search
 
-" Remap help key.
-inoremap <F1> <ESC>:set invfullscreen<CR>a
-nnoremap <F1> :set invfullscreen<CR>
-vnoremap <F1> :set invfullscreen<CR>
+set wildmenu  "show list instead of just completing
+set wildmode=list:longest,full
 
-" Textmate holdouts
+set nofoldenable          "no auto fold code
+set foldmethod=marker
+set foldmarker={,}
 
-" Formatting
-map <leader>q gqip
+set list
+set listchars=tab:>.,trail:.,extends:#,nbsp:. " Highlight problematic whitespace
 
-" Visualize tabs and newlines
-set listchars=tab:▸\ ,eol:¬
-" Uncomment this to enable by default:
-" set list " To enable by default
-" Or use your leader key + l to toggle on/off
-map <leader>l :set list!<CR> " Toggle tabs and EOL
-
-" Color scheme (terminal)
-set t_Co=256
+"set background=light
 set background=dark
-" let g:solarized_termcolors=256
-" let g:solarized_termtrans=1
+set signcolumn=yes
 
-" My own keymap
-nmap <C-O> :FuzzyOpen <CR>
-nmap <C-P> :NERDTreeToggle "\<CR>"
+"mappings
+let mapleader = ","
 
-nnoremap <C-T> :tabnew <CR>
+imap jk <Esc>
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"colorscheme NeoSolarized
 
+"PLUGINS
+"CtrlP
+map <c-b> :CtrlPBuffer<CR>
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_max_depth=1000
+let g:ctrlp_max_files=100000
 
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/.git/*,*/node_modules/*     " MacOSX/Linux
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v(.git|cache|vendor|node_modules|lib|tmp|bin|var|test|docs|build|assets)$',
+  \ }
 
-" colorscheme deus
+"emmet
+au BufRead,BufNewFile *.html,*.css,*.twig map <buffer> <leader>e <c-y>,
+
+" Allow netrw to remove non-empty local directories
+"
+let g:netrw_localrmdir='rm -r'
+
+"gitgutter
+let g:gitgutter_enabled = 1
+let g:gitgutter_override_sign_column_highlight = 0
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+    \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> <leader>r :call LanguageClient_textDocument_rename()<CR>
+
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"

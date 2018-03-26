@@ -22,4 +22,4 @@ Neovim containerized with my custom setup
 
 ## Preview
 
-![Preview of this setup](https://pyaillet.github.com/nvim/images/screenshot.png)
+![Preview of this setup](https://pyaillet.github.io/nvim/images/screenshot.png)

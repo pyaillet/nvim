@@ -18,7 +18,7 @@ ENV GO_VERSION=1.19.2
 ENV DISTRO=jammy
 
 COPY --from=neovim_build /work/dest /usr/local
-COPY install-go.sh install-rust.sh install-node.sh /tmp
+COPY install-go.sh install-rust.sh install-node.sh /tmp/
 COPY init.lua /tmp/init.lua
 COPY global.vim /tmp/sysinit.vim
 
@@ -33,6 +33,7 @@ RUN apt-get update \
   && nvim --headless -u /etc/xdg/nvim/first.lua -c 'autocmd User PackerComplete quitall' -c 'PackerSync' \
   && nvim --headless -u /etc/xdg/nvim/first.lua -c 'autocmd User PackerComplete quitall' -c 'PackerSync' \
   && echo "alias vi=nvim\nalias vim=nvim" >> /etc/profile.d/15-aliases.sh \
+  && chmod +x /etc/profile.d/15-aliases.sh \
   && useradd ubuntu --uid 1000 --home /home/ubuntu --create-home --groups users,adm,operator,staff --shell /usr/bin/zsh
 
 USER ubuntu

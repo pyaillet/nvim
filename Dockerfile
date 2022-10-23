@@ -32,8 +32,8 @@ RUN apt-get update \
   && sed '/^-- End packer setup$/q' /etc/xdg/nvim/init.lua > /etc/xdg/nvim/first.lua \
   && nvim --headless -u /etc/xdg/nvim/first.lua -c 'autocmd User PackerComplete quitall' -c 'PackerSync' \
   && nvim --headless -u /etc/xdg/nvim/first.lua -c 'autocmd User PackerComplete quitall' -c 'PackerSync' \
-  && echo "alias vi=nvim\nalias vim=nvim" >> /etc/profile.d/15-aliases \
-  && useradd ubuntu --uid 1000 --home /home/ubuntu --create-home --groups users,adm,operator,staff
+  && echo "alias vi=nvim\nalias vim=nvim" >> /etc/profile.d/15-aliases.sh \
+  && useradd ubuntu --uid 1000 --home /home/ubuntu --create-home --groups users,adm,operator,staff --shell /usr/bin/zsh
 
 USER ubuntu
 

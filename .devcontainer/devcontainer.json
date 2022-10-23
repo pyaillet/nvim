@@ -1,5 +1,5 @@
 {
-  "image": "pyaillet/nvim:0.8.0-3",
+  "image": "pyaillet/nvim:0.8.0-4",
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:1": {},
     "ghcr.io/devcontainers/features/sshd:1": {

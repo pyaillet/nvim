@@ -60,7 +60,7 @@ require('packer').startup({function(use)
   use 'kyazdani42/nvim-web-devicons' -- lua
   use 'kyazdani42/nvim-tree.lua'
 
-  use { 'iCyMind/NeoSolarized', run = ':colorscheme NeoSolarized' }
+  use 'iCyMind/NeoSolarized'
   
   if packer_bootstrap then
     require('packer').sync()
@@ -72,6 +72,7 @@ end, config = {
 -- End packer setup
 
 vim.opt.termguicolors = true
+vim.cmd([[colorscheme NeoSolarized]])
 
 -- Set completeopt to have a better completion experience
 -- :help completeopt

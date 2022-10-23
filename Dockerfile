@@ -23,7 +23,7 @@ COPY init.lua /tmp/init.lua
 COPY global.vim /tmp/sysinit.vim
 
 RUN apt-get update \
-  && apt-get install -y --no-install-recommends ripgrep fzf git wget curl gnupg ca-certificates \
+  && apt-get install -y --no-install-recommends ripgrep fzf git wget curl gnupg ca-certificates zsh \
   && /tmp/install-go.sh \
   && /tmp/install-rust.sh \
   && /tmp/install-node.sh \

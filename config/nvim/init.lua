@@ -1,7 +1,7 @@
 -- Packer setup
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = '/usr/local/share/nvim/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
     vim.cmd [[packadd packer.nvim]]
@@ -65,9 +65,7 @@ require('packer').startup({function(use)
   if packer_bootstrap then
     require('packer').sync()
   end
-end, config = {
-  package_root = "/usr/local/share/nvim/site/pack",
-}})
+end})
 
 -- End packer setup
 
@@ -290,3 +288,129 @@ cmp.setup({
   },
 })
 
+-- have a fixed column for the diagnostics to appear in
+-- this removes the jitter when warnings/errors flow in
+vim.g.signcolumn = yes
+
+-- Set updatetime for CursorHold
+-- 300ms of no cursor movement to trigger CursorHold
+vim.g.updatetime = 300
+-- Show diagnostic popup on cursor hover (Disabled because it's the same as
+-- <leader>cd <leader>cc from lspsaga, we should choose between the two
+-- autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
+
+-- Goto previous/next diagnostic warning/error
+vim.keymap.set('n', 'g[', [[<cmd>lua vim.diagnostic.goto_prev()<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', 'g]', [[<cmd>lua vim.diagnostic.goto_next()<CR>]], { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>ff', [[<cmd>lua require('telescope.builtin').find_files()<cr>]], { noremap = true })
+vim.keymap.set('n', '<leader>fg', [[<cmd>lua require('telescope.builtin').live_grep()<cr>]], { noremap = true })
+vim.keymap.set('n', '<leader>fb', [[<cmd>lua require('telescope.builtin').buffers()<cr>]], { noremap = true })
+vim.keymap.set('n', '<leader>fh', [[<cmd>lua require('telescope.builtin').help_tags()<cr>]], { noremap = true })
+
+require('gitsigns').setup()
+
+require('hardline').setup {}
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+    -- Using this option may slow down your editor, and you may see some duplicate highlights.
+    -- Instead of true it can also be a list of languages
+    additional_vim_regex_highlighting = false,
+  },
+}
+
+require'nvim-web-devicons'.setup {
+ -- globally enable default icons (default to false)
+ -- will get overriden by `get_icons` option
+ default = true;
+}
+
+local saga = require 'lspsaga'
+saga.init_lsp_saga()
+
+require("trouble").setup {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+}
+
+vim.keymap.set('n', 'gh', [[<cmd>lua require'lspsaga.provider'.lsp_finder()<CR>]], { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>ca', [[<cmd>lua require('lspsaga.codeaction').code_action()<CR>]], { noremap = true, silent = true })
+vim.keymap.set('v', '<leader>ca', [[:<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>]], { noremap = true, silent = true })
+
+vim.keymap.set('n', 'K', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]], { noremap = true, silent = true })
+
+vim.keymap.set('n', 'gs', [[<cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]], { noremap = true, silent = true })
+
+vim.keymap.set('n', 'gr', [[<cmd>lua require('lspsaga.rename').rename()<CR>]], { noremap = true, silent = true })
+
+-- vim.keymap.set('n', 'gd', [[<cmd>lua require'lspsaga.provider'.preview_definition()<CR>]], { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>cd', [[<cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>]], { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>cc', [[<cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>]], { noremap = true, silent = true })
+
+vim.keymap.set('n', '[e', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_prev()<CR>]], { noremap = true, silent = true })
+vim.keymap.set('n', ']e', [[<cmd>lua require'lspsaga.diagnostic'.lsp_jump_diagnostic_next()<CR>]], { noremap = true, silent = true })
+
+-- init.lua
+vim.g.symbols_outline = {
+  highlight_hovered_item = true,
+  show_guides = true,
+  auto_preview = true,
+  position = 'right',
+  relative_width = true,
+  width = 25,
+  auto_close = false,
+  show_numbers = false,
+  show_relative_numbers = false,
+  show_symbol_details = true,
+  preview_bg_highlight = 'Pmenu',
+  keymaps = { -- These keymaps can be a string or a table for multiple keys
+    close = {"<Esc>", "q"},
+    goto_location = "<Cr>",
+    focus_location = "o",
+    hover_symbol = "<C-space>",
+    toggle_preview = "K",
+    rename_symbol = "r",
+    code_actions = "a",
+  },
+  lsp_blacklist = {},
+  symbol_blacklist = {},
+  symbols = {
+    File = {icon = "", hl = "TSURI"},
+    Module = {icon = "", hl = "TSNamespace"},
+    Namespace = {icon = "", hl = "TSNamespace"},
+    Package = {icon = "", hl = "TSNamespace"},
+    Class = {icon = "𝓒", hl = "TSType"},
+    Method = {icon = "ƒ", hl = "TSMethod"},
+    Property = {icon = "", hl = "TSMethod"},
+    Field = {icon = "", hl = "TSField"},
+    Constructor = {icon = "", hl = "TSConstructor"},
+    Enum = {icon = "ℰ", hl = "TSType"},
+    Interface = {icon = "ﰮ", hl = "TSType"},
+    Function = {icon = "", hl = "TSFunction"},
+    Variable = {icon = "", hl = "TSConstant"},
+    Constant = {icon = "", hl = "TSConstant"},
+    String = {icon = "𝓐", hl = "TSString"},
+    Number = {icon = "#", hl = "TSNumber"},
+    Boolean = {icon = "⊨", hl = "TSBoolean"},
+    Array = {icon = "", hl = "TSConstant"},
+    Object = {icon = "⦿", hl = "TSType"},
+    Key = {icon = "🔐", hl = "TSType"},
+    Null = {icon = "NULL", hl = "TSType"},
+    EnumMember = {icon = "", hl = "TSField"},
+    Struct = {icon = "𝓢", hl = "TSType"},
+    Event = {icon = "🗲", hl = "TSType"},
+    Operator = {icon = "+", hl = "TSOperator"},
+    TypeParameter = {icon = "𝙏", hl = "TSParameter"}
+  }
+}
+
+require"fidget".setup{}
+
+require'nvim-tree'.setup()

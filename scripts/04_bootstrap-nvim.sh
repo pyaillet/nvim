@@ -2,5 +2,5 @@
 
 echo "🚀 Bootstrapping neovim"
 
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+echo "\n\n" | nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
